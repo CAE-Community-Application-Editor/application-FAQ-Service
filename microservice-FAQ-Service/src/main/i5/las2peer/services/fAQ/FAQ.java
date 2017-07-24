@@ -100,8 +100,8 @@ public class FAQ extends RESTService {
    */
   @POST
   @Path("/")
-  @Produces(MediaType.TEXT_PLAIN)
-  @Consumes(MediaType.APPLICATION_JSON)
+  @Produces(MediaType.APPLICATION_JSON)
+  @Consumes(MediaType.TEXT_PLAIN)
   @ApiResponses(value = {
        @ApiResponse(code = HttpURLConnection.HTTP_OK, message = "faqResponse")
   })
@@ -120,7 +120,7 @@ public class FAQ extends RESTService {
             stmnt.setString(3, data_JSON.category);
             stmnt.executeUpdate(); 
             stmnt.close();
-            result.put("message", "successfully added Question: '"+question +"'"); 
+            result.put("message", "successfully added Question"); 
         }
         return Response.status(HttpURLConnection.HTTP_OK).entity(result.toJSONString()).build();
     } catch (Exception e) { 
