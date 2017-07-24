@@ -93,7 +93,7 @@ public class FAQ extends RESTService {
    * 
    * postFAQ
    * 
-   * @param data a String 
+   * @param data a JSONObject 
    * 
    * @return Response  
    * 
@@ -101,12 +101,13 @@ public class FAQ extends RESTService {
   @POST
   @Path("/")
   @Produces(MediaType.TEXT_PLAIN)
-  @Consumes(MediaType.TEXT_PLAIN)
+  @Consumes(MediaType.JSON)
   @ApiResponses(value = {
        @ApiResponse(code = HttpURLConnection.HTTP_OK, message = "faqResponse")
   })
   @ApiOperation(value = "postFAQ", notes = " ")
   public Response postFAQ(String data) {
+    JSONObject data_JSON = (JSONObject) JSONValue.parse(data);
     
     try {  
         JSONObject result = new JSONObject();
