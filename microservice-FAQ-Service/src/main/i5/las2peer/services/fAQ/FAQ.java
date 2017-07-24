@@ -111,17 +111,13 @@ public class FAQ extends RESTService {
     
     try {  
         JSONObject result = new JSONObject();
-        String[] requestData = data.split("&");
-        String[] question = requestData[0].split("="); 
-        String[] answer = requestData[1].split("="); 
-        String[] category = requestData[2] 
-            .split("=");  
-        if(question.length>1&&answer.length>1){
+        
+        if(question.length>1){
             Connection conn = service.dbm.getConnection();
             PreparedStatement stmnt = conn.prepareStatement("INSERT INTO faq  (question, answer, category) VALUES (?,?,?)");
-            stmnt.setString(1, question[1]); 
-            stmnt.setString(2, answer[1]); 
-            stmnt.setString(3, category[1]);
+            stmnt.setString(1, data_JSON.question); 
+            stmnt.setString(2, data_JSON.answer); 
+            stmnt.setString(3, data_JSON.category);
             stmnt.executeUpdate(); 
             stmnt.close();
             result.put("message", "successfully added Question: '"+question +"'"); 
