@@ -112,12 +112,15 @@ public class FAQ extends RESTService {
         JSONObject result = new JSONObject();
         String[] requestData = data.split("&");
         String[] question = requestData[0].split("="); 
-        String[] answer = requestData[1].split("=");  
+        String[] answer = requestData[1].split("="); 
+        String[] category = requestData[2] 
+            .split("=");  
         if(question.length>1&&answer.length>1){
             Connection conn = service.dbm.getConnection();
-            PreparedStatement stmnt = conn.prepareStatement("INSERT INTO faq  (question, answer) VALUES (?,?)");
+            PreparedStatement stmnt = conn.prepareStatement("INSERT INTO faq  (question, answer, category) VALUES (?,?,?)");
             stmnt.setString(1, question[1]); 
-            stmnt.setString(2, answer[1]);
+            stmnt.setString(2, answer[1]); 
+            stmnt.setString(3, category[1]);
             stmnt.executeUpdate(); 
             stmnt.close();
             result.put("message", "successfully added Question: '"+question +"'"); 
@@ -158,14 +161,15 @@ public class FAQ extends RESTService {
     // faqResponse
     try {
         Connection conn = service.dbm.getConnection();
-        PreparedStatement stmnt = conn.prepareStatement("SELECT id, question,answer FROM faq");
+        PreparedStatement stmnt = conn.prepareStatement("SELECT id, question,answer, category FROM faq");
         ResultSet rs = stmnt.executeQuery(); 
         JSONArray result = new JSONArray();
         while (rs.next()) { 
             JSONObject obj = new JSONObject();
             obj.put("id", rs.getInt(1));
             obj.put("question", rs.getString(2)); 
-            obj.put("answer",rs.getString(3));
+            obj.put("answer",rs.getString(3)); 
+            obj.put("category",rs.getString(4));
             result.add(obj);
         } 
         stmnt.close();

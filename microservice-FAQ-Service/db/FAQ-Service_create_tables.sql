@@ -9,6 +9,7 @@
 CREATE TABLE caeschema.faq (
   question VARCHAR(255) ,
   id INT NOT NULL AUTO_INCREMENT ,
+  category VARCHAR(255) ,
   answer VARCHAR(255) ,
 CONSTRAINT id_PK PRIMARY KEY (id)
  
