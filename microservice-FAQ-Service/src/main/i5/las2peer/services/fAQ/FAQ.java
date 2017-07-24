@@ -101,7 +101,7 @@ public class FAQ extends RESTService {
   @POST
   @Path("/")
   @Produces(MediaType.TEXT_PLAIN)
-  @Consumes(MediaType.JSON)
+  @Consumes(MediaType.APPLICATION_JSON)
   @ApiResponses(value = {
        @ApiResponse(code = HttpURLConnection.HTTP_OK, message = "faqResponse")
   })
